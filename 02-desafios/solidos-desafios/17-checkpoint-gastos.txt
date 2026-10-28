@@ -1,0 +1,12 @@
+data;descricao;categoria;valor
+01/10/2026;Almoço;Alimentação;25.90
+01/10/2026;Ônibus;Transporte;4.40
+02/10/2026;Livro;Educação;49.90
+03/10/2026;Lanche; alimentação ;12,50
+03/10/2026;Uber;Transporte;abc
+04/10/2026;Curso;Educação;-30
+05/10/2026;Mercado;Alimentação
+
+06/10/2026;Ônibus;TRANSPORTE;4.40
+07/10/2026;Pizza;Alimentação;58.00
+08/10/2026;Fone;Eletrônicos;89.90

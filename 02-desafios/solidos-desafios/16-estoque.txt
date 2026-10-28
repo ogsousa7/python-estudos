@@ -1,0 +1,12 @@
+produto;quantidade
+Teclado;12
+Mouse;3
+Monitor;0
+
+Headset;7
+Webcam;2
+
+Mouse;abc
+Monitor;-3
+Webcam
+;10

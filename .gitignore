@@ -1,0 +1,19 @@
+# Ambientes virtuais
+.venv/
+.venv-*/
+venv/
+
+# Arquivos temporários do Python
+__pycache__/
+*.pyc
+
+# Configurações locais e segredos
+.env
+.env.*
+
+# Arquivos gerados por exercícios
+16-reposicao.txt
+16-log.txt
+
+# Projeto que já possui repositório próprio
+05-projetos/mini-loja/

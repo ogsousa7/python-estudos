@@ -1,0 +1,3 @@
+produto;preco
+teclado;150
+mouse;80

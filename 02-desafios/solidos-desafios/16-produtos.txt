@@ -1,0 +1,8 @@
+  teclado
+MOUSE
+
+monitor  
+teclado
+Headset
+
+mouse
