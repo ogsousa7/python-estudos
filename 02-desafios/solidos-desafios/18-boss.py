@@ -50,14 +50,33 @@ def update_customer(customer_id):
                 print("2 - Age")
                 print("3 - Status")
 
-                update_option = int(input("Choose an option: "))
+                try:
+                    update_option = int(input("Choose an option: "))
+                except ValueError:
+                    print("Invalid option!")
+                    return
 
                 if update_option == 1:
                     new_name = input("New name: ").strip().capitalize()
+
+                    if not new_name:
+                        print("New name is empty.")
+                        return
+
                     customer['name'] = new_name
 
                 elif update_option == 2:
-                    new_age = int(input("New age: "))
+
+                    try:
+                        new_age = int(input("New age: "))
+                    except ValueError:
+                        print("Invalid age.")
+                        return
+
+                    if new_age <= 0:
+                        print("Age must be greater than zero.")
+                        return
+
                     customer['age'] = new_age
 
                 elif update_option == 3:
@@ -65,11 +84,49 @@ def update_customer(customer_id):
 
                 else:
                     print("Invalid option.")
+                    return
 
                 break
 
         if not customer_found:
-            print("Customer not found.")            
+            print("Customer not found.") 
+            return    
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(customers, file, indent=4, ensure_ascii=False)  
+
+    print("Customer updated succesfully!")
+
+
+def generate_report():
+    with open(file_path, "r", encoding="utf-8") as file:
+        customers = json.load(file)
+
+    if not customers:
+        print("No customers registered.")
+        return
+
+    total_customers = len(customers)
+    active = 0
+    inactive = 0
+    total_age = 0
+    oldest_customer = None
+
+    for customer in customers:
+
+        if customer['active']:
+            active += 1
+        else:
+            inactive += 1
+
+        if oldest_customer is None or customer['age'] > oldest_customer['age']:
+            oldest_customer = customer
+
+        total_age += customer['age']
+
+    average_age = total_age / total_customers
+
+    print(f"\nTotal customers: {total_customers} \nActive customers: {active} \nInactive customers: {inactive} \nAverage age: {average_age:.2f} \nOldest customer: {oldest_customer['name']} {oldest_customer['age']} years\n")
 
 while True:
     print("=== CUSTUMER MANAGEMENT ===\n")
@@ -79,7 +136,15 @@ while True:
     print("4 - Generate report")
     print("5 - Exit\n")
 
-    option = int(input("Choose an option: "))
+    try:
+        option = int(input("Choose an option: "))
+    except ValueError:
+        print("Please enter a valid number.")
+        continue
+
+    if option < 1 or option > 5:
+        print("Invalid option. Choose between 1 and 5.")
+        continue
 
     if option == 1:
 
@@ -87,20 +152,37 @@ while True:
 
     elif option == 2:
 
-        name = input("Name: ")
-        age = int(input("Age: "))
+        name = input("Name: ").strip()
+
+        if not name:
+            print("Plase enter a name.")
+            continue
+
+        try:
+            age = int(input("Age: "))
+        except ValueError:
+            print("Invalid age.")
+            continue
+
+        if age <= 0:
+            print("Age is not greater than zero.")
+            continue
 
         register_customer(name, age)
 
     elif option == 3:
 
-        customer_id = int(input("Customer ID: "))
+        try:
+            customer_id = int(input("Customer ID: "))
+        except ValueError:
+            print("ID invalid.")
+            continue
 
         update_customer(customer_id)
 
     elif option == 4:
 
-        pass
+        generate_report()
 
     elif option == 5:
 
